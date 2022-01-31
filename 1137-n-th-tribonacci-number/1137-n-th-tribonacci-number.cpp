@@ -1,8 +1,6 @@
 class Solution {
 public:
 long long int tribonacci(int n) {
-         // fib -> 1 1 2 3 5
-        // pos -> 1 2 3 4 5
         long long int n1 =0;
         long long int n2 =1;
         long long int n3 =1;
