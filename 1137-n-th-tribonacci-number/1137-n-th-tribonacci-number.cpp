@@ -1,4 +1,5 @@
 class Solution {
+    long long int dp[40]={-1};
 public:
 long long int tribonacci(int n) {
         long long int n1 =0;
