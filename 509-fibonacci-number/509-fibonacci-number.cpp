@@ -1,5 +1,4 @@
 class Solution {
-    int dp[35]={-1};
 public:
     int fib(int n) {
         if (n == 0)
