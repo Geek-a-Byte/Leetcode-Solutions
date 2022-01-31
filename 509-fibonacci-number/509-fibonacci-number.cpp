@@ -1,4 +1,5 @@
 class Solution {
+    int dp[35]={-1};
 public:
     int fib(int n) {
         // fib -> 1 1 2 3 5
