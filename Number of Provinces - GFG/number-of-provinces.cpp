@@ -11,7 +11,6 @@ class Solution {
     bool visited[505]={false};
     void dfs(int parent, int n, vector<vector<int>>graph)
     {
-        // cout<<parent<<" ";
         visited[parent]=1;
         for(int j=0;j<n;j++)
         {
@@ -21,15 +20,6 @@ class Solution {
                 dfs(j, n, graph);
             }
         }
-        
-        // for(auto child: graph[parent])
-        // {
-        //     if(!visited[child])
-        //     {
-        //         visited[child]=1;
-        //         dfs(child, graph);
-        //     }
-        // }
     }
     int numProvinces(vector<vector<int>> adj, int nodes) {
         // code here
