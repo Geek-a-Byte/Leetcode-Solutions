@@ -9,85 +9,75 @@ using namespace std;
 
 class Solution {
     public:
-    // DFS Traversal to find the count of
-// island surrounded by water
-void dfs(vector<vector<int> >& matrix,
-         vector<vector<bool> >& visited, int x, int y,
-         int n, int m, bool &hasCornerCell)
-{
-    // If the land is already visited
-    // or there is no land or the
-    // coordinates gone out of matrix
-    // break function as there
-    // will be no islands
-    if (x < 0 || y < 0 || x >= n || y >= m
-        || visited[x][y] == true || matrix[x][y] == 0)
-        return;
- 
-      // Check for the corner cell
-    if(x == 0 || y == 0 || x == n-1 || y == m-1)
+    // up, down, left, right, all 4 diagonals
+    vector<pair<int,int>>moves={{-1,0},{+1,0},{0,-1},{0,+1}};
+    bool visited[505][505];
+    
+    bool cornerCellCheck(int i, int j, vector<vector<int>>& grid)
     {
-      if(matrix[x][y] == 1)
-        hasCornerCell = true;
-    }
-   
-    // Mark land as visited
-    visited[x][y] = true;
- 
-    // Traverse to all adjacent elements
-    dfs(matrix, visited, x + 1, y, n, m, hasCornerCell);
-    dfs(matrix, visited, x, y + 1, n, m, hasCornerCell);
-    dfs(matrix, visited, x - 1, y, n, m, hasCornerCell);
-    dfs(matrix, visited, x, y - 1, n, m, hasCornerCell);
-}
- 
-// Function that counts the closed island
-int closedIslands(vector<vector<int> >& matrix, int n,
-                      int m)
-{
- 
-    // Create boolean 2D visited matrix
-    // to keep track of visited cell
- 
-    // Initially all elements are
-    // unvisited.
-    vector<vector<bool>> visited(n,vector<bool>(m, false));
- 
-    // Store the count of islands
-    int result = 0; 
-   
-    // Call DFS on the cells which
-    // are not on corners with value '1'
-    for (int i = 0; i < n; ++i)
-    {
-        for (int j = 0; j < m; ++j)
+        int rows = grid.size();
+        int cols = grid[0].size();
+        if((i==0 or j==0 or i==rows-1 or j==cols-1) and grid[i][j]==1)
         {
- 
-            if ((i != 0 && j != 0 && i != n - 1 && j != m - 1)
-                and matrix[i][j] == 1
-                and visited[i][j] == false)
+            return true;
+        }
+        return false;
+    }
+    bool boundaryCheck(int i,int j, vector<vector<int>>& grid)
+    {
+        int rows = grid.size();
+        int cols = grid[0].size();
+        if(i<0 or i>=rows or j<0 or j>=cols) return false;
+        return true;
+    }
+    void dfs(int i, int j, vector<vector<int>>& grid, bool& hasCornerCell)
+    {
+        if(cornerCellCheck(i,j,grid))
+        {
+            hasCornerCell=true;
+        }
+        visited[i][j] = 1;
+        for (auto k : moves)
+        {
+            int nx=i+k.first;
+            int ny=j+k.second;
+            
+            if (boundaryCheck(nx,ny,grid) and !visited[nx][ny] and grid[nx][ny]==1)
             {
-               
-                // Determine if the island is closed
-                  bool hasCornerCell = false;
-                   
-                /* hasCornerCell will be
-                 updated to true while DFS traversal
-                if there is a cell with value
-                 '1' on the corner */
-                dfs(matrix, visited, i, j, n,
-                              m, hasCornerCell);
-                 
-                /* If the island is closed*/
-                  if(!hasCornerCell)
-                  result = result + 1;
+                dfs(nx, ny, grid, hasCornerCell);
             }
         }
     }
- 
-    // Return the final count
-    return result;
-}
+    int closedIslands(vector<vector<int>>& grid, int N, int M) {
+        // Code here
+        int rows = N;
+        int cols = M;
+        int cnt=0;
+        
+        for (int i = 0; i < rows; i++)
+        {
+            for(int j = 0; j < cols; j++){
+                
+                visited[i][j]=false;
+            }
+        }
+     
+        for (int i = 0; i < rows; i++)
+        {
+            for(int j = 0; j < cols; j++){
+                
+                if (!visited[i][j] and grid[i][j]==1)
+                {
+                    bool hasCornerCell=false;
+                    dfs(i,j, grid, hasCornerCell);
+                    // cout<<hasCornerCell<<endl;
+                    if(!hasCornerCell) cnt++;
+                }
+            }
+        }
+        return cnt;
+    }
+
  
 };
 
