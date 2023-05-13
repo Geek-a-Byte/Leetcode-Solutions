@@ -19,6 +19,25 @@ public:
         int s=grid.size();
         int e=grid[0].size();
         vector<vector<int>>dp(s, vector<int>(e, -1));
-        return f(s-1, e-1, dp, grid); 
+        dp[0][0]=1;
+        for(int i=0;i<s;i++)
+        {
+            for(int j=0;j<e;j++)
+            {
+                if(i==0 and j==0)
+                {
+                    dp[0][0]=grid[0][0];
+                }
+                else
+                {
+                    int up=1e9;
+                    int left=1e9;
+                    if(i>0) up=grid[i][j] + dp[i-1][j];
+                    if(j>0) left=grid[i][j] + dp[i][j-1];
+                    dp[i][j]=min(up,left);
+                }
+            }
+        }
+        return dp[s-1][e-1];
     }
 };
