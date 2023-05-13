@@ -43,7 +43,7 @@ Dynamic Programming
 - [x] House Robber - https://leetcode.com/problems/house-robber/
 - [x] House Robber II - https://leetcode.com/problems/house-robber-ii/
 - Decode Ways - https://leetcode.com/problems/decode-ways/
-- Unique Paths - https://leetcode.com/problems/unique-paths/
+- [x] Unique Paths - https://leetcode.com/problems/unique-paths/
 - Jump Game - https://leetcode.com/problems/jump-game/
 
 ---
