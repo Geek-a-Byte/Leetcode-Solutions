@@ -11,14 +11,14 @@
  */
 class BSTIterator {
 public:
-    queue<int>stk;
+    queue<int>q;
     void inOrder(TreeNode* node)
     {
         if (node == NULL)
             return;
     
         inOrder(node->left);
-        stk.push(node->val);
+        q.push(node->val);
         inOrder(node->right);
     }
 
@@ -27,13 +27,13 @@ public:
     }
     
     int next() {
-       int top=stk.front();
-       stk.pop();
+       int top=q.front();
+       q.pop();
        return top;
     }
     
     bool hasNext() {
-       return !stk.empty(); 
+       return !q.empty(); 
     }
 };
 
