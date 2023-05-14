@@ -89,7 +89,8 @@ class Solution{
         map<int, Node*>mp;
         Node* root=NULL;
         
-        
+        // -1 can be anywhere in the parent array, so traverse the whole array and
+        // make node of each index, because every index would a new node in the tree
         for(int i=0;i<N;i++)
         {
             if(parent[i]==-1)
@@ -108,7 +109,7 @@ class Solution{
             {
                 continue;
             }
-            Node* temp = mp[parent[i]];
+            Node* temp = mp[parent[i]]; // the value at each index would be the parent of that index
             if(!temp->left)
             {
                 temp->left = mp[i];
