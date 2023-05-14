@@ -17,14 +17,18 @@ public:
         {
             return {};
         }
+
         queue<TreeNode*>q;
         q.push(root);
-        int lvl=0;
+    
         bool left_to_right=true;
+
         vector<vector<int>>v2;
         vector<int>v;
+
         v.push_back(root->val);
         v2.push_back(v);
+
         while(!q.empty())
         {
             v.clear();
@@ -46,6 +50,7 @@ public:
                     q.push(child);
                 }
             }
+            
             left_to_right=!(left_to_right);
             if(left_to_right==false)
             {
