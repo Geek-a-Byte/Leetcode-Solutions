@@ -9,6 +9,8 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+// https://www.youtube.com/watch?v=LgLRTaEMRVc&ab_channel=takeUforward
 class Solution {
 public:
     TreeNode* build(vector<int>& postorder, int pros, int proe, vector<int>& inorder, int inos, int inoe,map<int,int>& inMap)
@@ -23,14 +25,7 @@ public:
         int inRoot=inMap[postorder[proe]];
         int numsLeft=inRoot-inos;
 
-        // new preorder index will start from 1+curr root's index and end on the same length as numsLeft
-        // for root's left we will take the array on leftside of root on inorder array.
-        // so new inorder index will be same as it is and end on inRoot-1
         root->left=build(postorder, pros, pros+numsLeft-1, inorder, inos, inRoot-1, inMap);
-        
-        // for root's right we will take index after pres+numsLeft as prestart
-        // and preend will be as it is
-        // for inorder the start index will start from inRoot+1 and at same index
         root->right=build(postorder, pros+numsLeft, proe-1, inorder, inRoot+1,inoe, inMap);
 
         return root;
