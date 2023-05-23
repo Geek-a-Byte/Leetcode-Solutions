@@ -39,11 +39,55 @@ signed main()
 {
     fast
     fileOJ();
-    int ans=1;
-    TC{
-        sp(0);
-        cout<<"Case "<<cn<<":";
-        sp(4);
-        cout<<ans<<endl;
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        vector<int>odd;
+        vector<int>even;
+        for(int i=0; i<n; i++)
+        {
+            int x;
+            cin>>x;
+            if(x%2==0)
+            {
+                even.push_back(x);
+            }
+            else
+            {
+                odd.push_back(x);
+            }
+        }
+        sort(even.begin(),even.end());
+        sort(odd.begin(),odd.end());
+        int f=0;
+        for(int i=0; i<even.size(); i++)
+        {
+            for(int j=0; j<odd.size(); j++)
+            {
+                if(even[i]<odd[j])
+                {
+                   f=1;
+                   break;
+                }
+                else
+                {
+                    int d=even[i]-odd[j];
+                    // cout<<d<<" ";
+                    break;
+                }
+            }
+            if(f==1) break;
+        }
+        if(f==1)
+        {
+            cout<<"NO\n";
+        }
+        else
+        {
+            cout<<"YES\n";
+        }
     }
 }
